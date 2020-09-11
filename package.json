@@ -1,0 +1,22 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "this is a demo of expressjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ah470346/EpressJS-Demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ah470346/EpressJS-Demo/issues"
+  },
+  "homepage": "https://github.com/Ah470346/EpressJS-Demo#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
