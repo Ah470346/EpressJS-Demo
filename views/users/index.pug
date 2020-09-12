@@ -1,0 +1,16 @@
+h1 Users
+
+- var a = q;
+
+a(href="/user/create") New
+
+form(action="/user/search" , method="GET")
+	input(id="input" name="q" type="text" value=a) 
+	button Search	
+ul
+	each user in users
+		li
+			span= user.name
+			span &nbsp;
+			a(href="/user/"+ user.id) View
+
