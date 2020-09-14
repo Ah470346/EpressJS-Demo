@@ -1,16 +1,19 @@
-h1 Users
+extends ../layout/commom.pug
 
-- var a = q;
+block content
+	h1 Users
 
-a(href="/user/create") New
+	- var a = q;
 
-form(action="/user/search" , method="GET")
-	input(id="input" name="q" type="text" value=a) 
-	button Search	
-ul
-	each user in users
-		li
-			span= user.name
-			span &nbsp;
-			a(href="/user/"+ user.id) View
+	a(href="/user/create") New
+
+	form(action="/user/search" , method="GET")
+		input(id="input" name="q" type="text" value=a) 
+		button Search	
+	ul
+		each user in users
+			li
+				span= user.name
+				span &nbsp;
+				a(href="/user/"+ user.id) View
 

@@ -1,9 +1,13 @@
-h1 Create users	
 
-form(action="/user/create", method="POST")
-	label Name
-	input(name="name" type="text")
-	label Phone
-	input(name="phone" type="text")
+extends ../layout/commom.pug
 
-	button Create	
+block content
+	h1 Create users	
+
+	form(action="/user/create", method="POST")
+		label Name
+		input(name="name" type="text")
+		label Phone
+		input(name="phone" type="text")
+
+		button Create	
