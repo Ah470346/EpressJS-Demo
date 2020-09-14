@@ -1,7 +1,19 @@
 
 html
-	head
-		link(rel="stylesheet",href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
-		link(rel="stulesheet" , href="/styles/commom.css")
-	body
-		block content	
+    head
+        link(rel="stylesheet",href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+        link(rel="stulesheet" , href="/styles/commom.css")
+    body
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.text-white
+            a.navbar-brand(href='#') 
+              img(width="100px" , height="25px", src="https://coders-x.com/wp-content/themes/codersx/dist/images/logo@256.png")
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+              span.navbar-toggler-icon
+            #navbarSupportedContent.collapse.navbar-collapse
+              ul.navbar-nav.mr-auto
+                li.nav-item.active
+                  a.nav-link(href='/') Home
+                li.nav-item
+                  a.nav-link(href='/user') User
+        .container
+            block content
