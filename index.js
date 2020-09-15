@@ -1,10 +1,11 @@
 const express = require('express');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 const app = express();
 const port = 3000;
 
 const usersRoutes = require('./routes/users.route.js');
-
+const authRoutes = require('./routes/auth.route.js');
+const authMiddleware = require('./middleware/auth.middleware.js');
 
 
 // pug
@@ -15,7 +16,7 @@ app.set('views', './views');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(express.static('public'));
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.get('/', function(req,res){
 	res.render('index',{
@@ -23,7 +24,8 @@ app.get('/', function(req,res){
 	});
 })
 
-app.use('/user',usersRoutes);
+app.use('/user',authMiddleware.requireAuth,usersRoutes);
+app.use('/auth',authRoutes)
 
 app.listen(port , function(){
 	console.log('server listening on port ' + port);

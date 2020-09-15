@@ -2,7 +2,7 @@
 const db = require('../db.js');
 const shortid = require('shortid');
 
-module.exports.index = function(red,res){
+module.exports.index = function(req,res){
 	res.render('users/index',{
 		users: db.get('users').value()
 	});
