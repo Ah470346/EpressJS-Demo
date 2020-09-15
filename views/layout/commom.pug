@@ -15,5 +15,7 @@ html
                   a.nav-link(href='/') Home
                 li.nav-item
                   a.nav-link(href='/user') User
+            if user
+                p= user.name
         .container
             block content
