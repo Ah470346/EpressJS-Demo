@@ -1,0 +1,44 @@
+extends ../layout/commom.pug
+
+block content
+
+	h1 Products
+	- var a = q;
+	.d-flex.align-items-center
+		form.ml-auto(action="/products" , method="GET", class="d-flex")
+			input.form-control(id="input" name="q" type="text" value=a) 
+			button.btn.btn-primary.mr-3.ml-3 Search	
+	.row
+		each product in products
+			.col-3.mb-3
+				.card.m-0.p-0
+						.card-header.m-0.p-0
+							img(src=product.image, style="width: 100%;")
+						.card-body
+							h5= product.name
+							p= product.description
+							a.btn.btn-primary(href="#") Add to cart
+	.nav
+		ul.pagination
+			if begin==1
+				li.page-item.disabled 
+					a.page-link(href="#") Previous
+			if begin!=1
+				li.page-item
+					a.page-link(href="?page=" + (begin - 1)) Previous
+			if page==begin
+				li.page-item.disabled
+					a.page-link(href="?page="+ begin) #{begin}
+			else
+				li.page-item
+					a.page-link(href="?page="+ begin) #{begin} 			
+			li.page-item
+				a.page-link(href="?page=" + (begin + 1)) #{begin+1}
+			li.page-item
+				a.page-link(href="?page=" +(begin + 2)) #{begin+2}
+			if begin>(lengths/4)
+				li.page-item.disabled
+					a.page-link(href="#") Next
+			else
+				li.page-item
+					a.page-link(href="?page=" +(begin + 3)) Next

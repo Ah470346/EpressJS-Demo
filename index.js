@@ -6,6 +6,7 @@ const port = 3000;
 
 const usersRoutes = require('./routes/users.route.js');
 const authRoutes = require('./routes/auth.route.js');
+const productsRoutes = require('./routes/products.route.js');
 const authMiddleware = require('./middleware/auth.middleware.js');
 
 
@@ -26,7 +27,8 @@ app.get('/', function(req,res){
 })
 
 app.use('/user',authMiddleware.requireAuth,usersRoutes);
-app.use('/auth',authRoutes)
+app.use('/auth',authRoutes);
+app.use('/products',authMiddleware.requireAuth,productsRoutes);
 
 app.listen(port , function(){
 	console.log('server listening on port ' + port);
