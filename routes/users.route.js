@@ -4,7 +4,6 @@ var multer  = require('multer')
 var upload = multer({ dest: './public/uploads/' })
 const controller = require('../controllers/users.controller.js');
 const validate = require('../validate/users.validate.js');
-const authMiddleware = require('../middleware/auth.middleware.js');
 
 const router = express.Router();
 

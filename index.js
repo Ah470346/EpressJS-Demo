@@ -7,7 +7,11 @@ const port = 3000;
 const usersRoutes = require('./routes/users.route.js');
 const authRoutes = require('./routes/auth.route.js');
 const productsRoutes = require('./routes/products.route.js');
+const cartRoutes = require('./routes/cart.route.js');
+const transferRoutes = require('./routes/transfer.route.js');
 const authMiddleware = require('./middleware/auth.middleware.js');
+const sessionMiddleware = require('./middleware/session.middleware.js');
+const cartMiddleware = require('./middleware/cart.middleware.js');
 
 
 // pug
@@ -19,6 +23,7 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(express.static('public'));
 app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(cartMiddleware.cart);
 
 app.get('/', function(req,res){
 	res.render('index',{
@@ -26,9 +31,11 @@ app.get('/', function(req,res){
 	});
 })
 
-app.use('/user',authMiddleware.requireAuth,usersRoutes);
-app.use('/auth',authRoutes);
-app.use('/products',authMiddleware.requireAuth,productsRoutes);
+app.use('/user',sessionMiddleware.session,authMiddleware.requireAuth,usersRoutes);
+app.use('/auth', sessionMiddleware.session,authRoutes);
+app.use('/products',sessionMiddleware.session,authMiddleware.requireAuth,productsRoutes);
+app.use('/cart',sessionMiddleware.session,authMiddleware.requireAuth ,cartRoutes);
+app.use('/transfer', sessionMiddleware.session,authMiddleware.requireAuth , transferRoutes);
 
 app.listen(port , function(){
 	console.log('server listening on port ' + port);
