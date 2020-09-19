@@ -2,7 +2,9 @@ const db = require('../db');
 const shortid = require('shortid');
 
 module.exports.transfer = function(req,res,next){
-	res.render('transfer/index');
+	res.render('transfer/index',{
+		csrfToken: req.csrfToken()
+	});
 }
 
 module.exports.postTransfer = function(req,res,next){
