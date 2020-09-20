@@ -31,26 +31,30 @@ app.get('/', function(req,res){
 	});
 })
 
-app.use('/user',cartMiddleware.cart,
+app.use('/user',
 	sessionMiddleware.session,
+	cartMiddleware.cart,
 	authMiddleware.requireAuth,
 	usersRoutes);
-app.use('/auth', cartMiddleware.cart,sessionMiddleware.session,authRoutes);
-app.use('/products',
-	cartMiddleware.cart,
+app.use('/auth', 
 	sessionMiddleware.session,
+	cartMiddleware.cart,
+	authRoutes);
+app.use('/products',
+	sessionMiddleware.session,
+	cartMiddleware.cart,
 	authMiddleware.requireAuth,
 	productsRoutes);
 app.use('/cart',
-	cartMiddleware.cart,
 	sessionMiddleware.session,
+	cartMiddleware.cart,
 	authMiddleware.requireAuth ,
 	cartRoutes);
 app.use('/transfer',
 	csurf({cookie: true}),
-	cartMiddleware.cart, 
 	sessionMiddleware.session,
-	authMiddleware.requireAuth ,
+	cartMiddleware.cart,
+	authMiddleware.requireAuth , 
 	transferRoutes);
 
 app.listen(port , function(){
