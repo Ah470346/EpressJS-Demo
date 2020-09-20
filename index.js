@@ -24,8 +24,6 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(express.static('public'));
 app.use(cookieParser(process.env.SESSION_SECRET));
-app.use(cartMiddleware.cart);
-app.use(csurf({cookie: true}));
 
 app.get('/', function(req,res){
 	res.render('index',{
@@ -33,11 +31,27 @@ app.get('/', function(req,res){
 	});
 })
 
-app.use('/user',sessionMiddleware.session,authMiddleware.requireAuth,usersRoutes);
-app.use('/auth', sessionMiddleware.session,authRoutes);
-app.use('/products',sessionMiddleware.session,authMiddleware.requireAuth,productsRoutes);
-app.use('/cart',sessionMiddleware.session,authMiddleware.requireAuth ,cartRoutes);
-app.use('/transfer', sessionMiddleware.session,authMiddleware.requireAuth , transferRoutes);
+app.use('/user',cartMiddleware.cart,
+	sessionMiddleware.session,
+	authMiddleware.requireAuth,
+	usersRoutes);
+app.use('/auth', cartMiddleware.cart,sessionMiddleware.session,authRoutes);
+app.use('/products',
+	cartMiddleware.cart,
+	sessionMiddleware.session,
+	authMiddleware.requireAuth,
+	productsRoutes);
+app.use('/cart',
+	cartMiddleware.cart,
+	sessionMiddleware.session,
+	authMiddleware.requireAuth ,
+	cartRoutes);
+app.use('/transfer',
+	csurf({cookie: true}),
+	cartMiddleware.cart, 
+	sessionMiddleware.session,
+	authMiddleware.requireAuth ,
+	transferRoutes);
 
 app.listen(port , function(){
 	console.log('server listening on port ' + port);
